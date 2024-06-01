@@ -16,6 +16,7 @@ Note: You may use Google Translate for the wording of your welcome message.
 > Created a message controller to send the message via an api url.
 > Modified app.component.ts and .html to display all four threads in the order that CompletionService collected the threads.
 > Modified app.component.css to make the text more visible.
+> Modified tsconfig.json to allow imports
 
 2.  Modify the front end to display the price for a reservation in currency rates for U.S. dollars ($), Canadian dollars (C$), and euros (€) on different lines.
 
