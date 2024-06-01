@@ -26,6 +26,11 @@
   </div>
 </header>
 <main id="wrapper">
+
+  <div class="presentation-time" *ngIf="presentationTime">
+    <p>{{ presentationTime }}</p>
+  </div>
+
   <div class="scene" id="welcome">
     <article class="content">
 

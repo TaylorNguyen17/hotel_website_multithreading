@@ -20,6 +20,7 @@ export class AppComponent implements OnInit{
 
   private baseURL:string='http://localhost:8080';
   protected messages: string[] = [];
+  protected presentationTime: string = '';
 
   private getUrl:string = this.baseURL + '/room/reservation/v1/';
   private postUrl:string = this.baseURL + '/room/reservation/v1';
@@ -33,6 +34,8 @@ export class AppComponent implements OnInit{
   ngOnInit(){
 
     this.getMessages();
+
+    this.getPresentationTime();
 
     this.roomsearch= new FormGroup({
       checkin: new FormControl(' '),
@@ -91,6 +94,17 @@ export class AppComponent implements OnInit{
       },
       error: (error) => {
         console.error('Error fetching messages:', error);
+      }
+    });
+  }
+
+  private getPresentationTime() {
+    this.httpClient.get(this.baseURL + '/api/presentation-time', { responseType: 'text' }).subscribe({
+      next: (response: string) => {
+        this.presentationTime = response;
+      },
+      error: (error) => {
+        console.error('Error fetching presentation time:', error);
       }
     });
   }
