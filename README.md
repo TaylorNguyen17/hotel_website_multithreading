@@ -23,6 +23,7 @@ Note: You may use Google Translate for the wording of your welcome message.
 
 Note: It is not necessary to convert the values of the prices.
 
+> Updated app.component.html file to display three different currency symbols using the currency pipe syntax
 
 3.  Display the time for an online live presentation held at the Landon Hotel by doing the following:
 
