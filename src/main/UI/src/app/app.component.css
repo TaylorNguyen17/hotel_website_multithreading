@@ -312,6 +312,28 @@ header #nav .navbar ul li a:hover {
   color: #063642;
 }
 
+header #nav .navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header #nav .navbar .brand {
+  display: flex;
+  align-items: center;
+}
+
+header #nav .navbar .navbar-messages {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+header #nav .navbar .navbar-messages span {
+  margin-left: 10px;
+  color: #FFFFFF;
+}
+
 @media (min-width: 0) and (max-width: 650px) {
   /* line 36, ../../../components/sass/modules/_nav.scss */
   header #nav .navbar ul li a {

@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {HttpClient, HttpResponse,HttpHeaders} from "@angular/common/http";
 import { Observable } from 'rxjs';
 import {map} from "rxjs/operators";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 
 
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit{
   constructor(private httpClient:HttpClient){}
 
   private baseURL:string='http://localhost:8080';
+  protected messages: string[] = [];
 
   private getUrl:string = this.baseURL + '/room/reservation/v1/';
   private postUrl:string = this.baseURL + '/room/reservation/v1';
@@ -28,14 +30,16 @@ export class AppComponent implements OnInit{
   currentCheckInVal!:string;
   currentCheckOutVal!:string;
 
-    ngOnInit(){
-      this.roomsearch= new FormGroup({
-        checkin: new FormControl(' '),
-        checkout: new FormControl(' ')
-      });
+  ngOnInit(){
 
- //     this.rooms=ROOMS;
+    this.getMessages();
 
+    this.roomsearch= new FormGroup({
+      checkin: new FormControl(' '),
+      checkout: new FormControl(' ')
+    });
+
+    //     this.rooms=ROOMS;
 
     const roomsearchValueChanges$ = this.roomsearch.valueChanges;
 
@@ -46,44 +50,51 @@ export class AppComponent implements OnInit{
     });
   }
 
-    onSubmit({value,valid}:{value:Roomsearch,valid:boolean}){
-      this.getAll().subscribe(
-
-        rooms => {console.log(Object.values(rooms)[0]);this.rooms=<Room[]>Object.values(rooms)[0]; }
-
-
+  onSubmit({value,valid}:{value:Roomsearch,valid:boolean}){
+    this.getAll().subscribe(
+      rooms => {console.log(Object.values(rooms)[0]);this.rooms=<Room[]>Object.values(rooms)[0]; }
       );
-    }
-    reserveRoom(value:string){
-      this.request = new ReserveRoomRequest(value, this.currentCheckInVal, this.currentCheckOutVal);
-
-      this.createReservation(this.request);
-    }
-    createReservation(body:ReserveRoomRequest) {
-      let bodyString = JSON.stringify(body); // Stringify payload
-      let headers = new Headers({'Content-Type': 'application/json'}); // ... Set content type to JSON
-     // let options = new RequestOptions({headers: headers}); // Create a request option
-
-     const options = {
-      headers: new HttpHeaders().append('key', 'value'),
-
-    }
-
-      this.httpClient.post(this.postUrl, body, options)
-        .subscribe(res => console.log(res));
-    }
-
-  /*mapRoom(response:HttpResponse<any>): Room[]{
-    return response.body;
-  }*/
-
-    getAll(): Observable<any> {
-
-
-       return this.httpClient.get(this.baseURL + '/room/reservation/v1?checkin='+ this.currentCheckInVal + '&checkout='+this.currentCheckOutVal, {responseType: 'json'});
-    }
-
   }
+
+  reserveRoom(value:string){
+    this.request = new ReserveRoomRequest(value, this.currentCheckInVal, this.currentCheckOutVal);
+
+    this.createReservation(this.request);
+  }
+
+  createReservation(body:ReserveRoomRequest) {
+    let bodyString = JSON.stringify(body); // Stringify payload
+    let headers = new Headers({'Content-Type': 'application/json'}); // ... Set content type to JSON
+    // let options = new RequestOptions({headers: headers}); // Create a request option
+
+    const options = {
+      headers: new HttpHeaders().append('key', 'value'),
+    }
+
+    this.httpClient.post(this.postUrl, body, options)
+      .subscribe(res => console.log(res));
+  }
+
+  // mapRoom(response:HttpResponse<any>): Room[]{
+  //   return response.body;
+  // }
+
+  getAll(): Observable<any> {
+    return this.httpClient.get(this.baseURL + '/room/reservation/v1?checkin='+ this.currentCheckInVal + '&checkout='+this.currentCheckOutVal, {responseType: 'json'});
+  }
+
+  private getMessages() {
+    this.httpClient.get<string[]>(this.baseURL + '/api/messages').subscribe({
+      next: (response: string[]) => {
+        this.messages = response;
+        console.log(this.messages);
+      },
+      error: (error) => {
+        console.error('Error fetching messages:', error);
+      }
+    });
+  }
+}
 
 
 

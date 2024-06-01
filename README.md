@@ -9,6 +9,13 @@ b.  Display the welcome message in both English and French by applying the resou
 
 Note: You may use Google Translate for the wording of your welcome message.
 
+> Created resource bundles for the two languages.
+> Created a message service that creates a thread pool of 4 different threads for demonstration.
+> Each thread grabs the welcome message from its bundle (2 English, 2 French).
+> A CompletionService collects the messages from the threads in the order that the threads finish.
+> Created a message controller to send the message via an api url.
+> Modified app.component.ts and .html to display all four threads in the order that CompletionService collected the threads.
+> Modified app.component.css to make the text more visible.
 
 2.  Modify the front end to display the price for a reservation in currency rates for U.S. dollars ($), Canadian dollars (C$), and euros (€) on different lines.
 
