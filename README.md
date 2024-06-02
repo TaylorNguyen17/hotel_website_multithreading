@@ -38,6 +38,8 @@ C.  Explain how you would deploy the Spring application with a Java back end and
 
 1.  Build the Dockerfile to create a single image that includes all code, including modifications made in parts B1 to B3. Commit and push the final Dockerfile to GitLab.
 
+> Added a Dockerfile using the jar directory from mvn clean install
+
 2.  Test the Dockerfile by doing the following:
 
 •   Create a Docker image of the current multithreaded Spring application.
