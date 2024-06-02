@@ -54,3 +54,5 @@ C.  Explain how you would deploy the Spring application with a Java back end and
 
 
 Note: Remember to commit and push your changes to GitLab.
+
+> Description is in a text file included in submission
