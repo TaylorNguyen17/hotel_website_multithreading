@@ -48,6 +48,8 @@ C.  Explain how you would deploy the Spring application with a Java back end and
 
 •   Submit a screenshot capture of the running application with evidence it is running in the container.
 
+> Screenshot included in submission
+
 3.  Describe how you would deploy the current multithreaded Spring application to the cloud. Include the name of the cloud service provider you would use.
 
 
